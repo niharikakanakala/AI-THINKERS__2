@@ -35,13 +35,13 @@ exports.createOrder = async(req, res, next) => {
       await order.save();
       const latestCounter = await Count.findOne({type: 'ORDER'});
       console.log(`latestCounter: ${JSON.stringify(latestCounter)}`)
-        const counter =( latestCounter || {counter:0}).counter + 1;
+        const counter = (latestCounter.counter || 0) + 1;
        const count = {
         counter: counter,
         type: 'ORDER',
       };
-      const counting = new Count(count);
-       await counting.save();
+     // const counting = new Count(count);
+       //await counting.save();
        // counting.push(order);
         await Count.findOneAndUpdate(
           { type: "ORDER" },
